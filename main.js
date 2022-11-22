@@ -4,6 +4,7 @@ const path = require('path');
 const port = 4000;
 
 
+app.use(express.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
   console.log(req.url);
@@ -20,7 +21,11 @@ app.get('/form', (req, res) => {
 });
 
 app.post('/result', (req, res) => {
-  res.send("Result page");
+  if (req.body.name === 'Test') {
+    res.send("Result page");
+  } else {
+    res.send("Sorry not a valide name")
+  }
 });
 
 app.listen(port, () => {
